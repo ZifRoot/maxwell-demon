@@ -45,7 +45,12 @@ function resizeCanvas(target, context) {
 
 function worldMetrics() {
   const rect = canvas.getBoundingClientRect();
-  return { width: rect.width, height: rect.height, scale: rect.width / WORLD.width };
+  return {
+    width: rect.width,
+    height: rect.height,
+    scaleX: rect.width / WORLD.width,
+    scaleY: rect.height / WORLD.height,
+  };
 }
 
 function createExperiment() {
@@ -102,7 +107,7 @@ function updateStats() {
 }
 
 function draw() {
-  const { width, height, scale } = worldMetrics();
+  const { width, height, scaleX, scaleY } = worldMetrics();
   ctx.clearRect(0, 0, width, height);
   ctx.fillStyle = "#0c141d";
   ctx.fillRect(0, 0, width, height);
@@ -139,7 +144,7 @@ function draw() {
   for (const p of particles) {
     ctx.beginPath();
     ctx.fillStyle = Math.hypot(p.vx, p.vy) >= settings.threshold ? "#ffad72" : "#5ed5e8";
-    ctx.arc(p.x * scale, p.y * scale, Math.max(1.6, scale * 0.006), 0, Math.PI * 2);
+    ctx.arc(p.x * scaleX, p.y * scaleY, Math.max(1.6, Math.min(scaleX, scaleY) * 0.006), 0, Math.PI * 2);
     ctx.fill();
   }
 }
