@@ -81,13 +81,17 @@ The simulation is a tool for exploring these questions, not a proof of a violati
 
 The goal is to keep the first version lightweight and easy to run locally, without a required backend or external runtime dependencies.
 
-## Getting started
+## Deployment
 
-1. Clone or download this repository.
-2. Open `index.html` in a modern browser. No build step, server, or external dependency is required.
-3. Select a partition mode, adjust its parameters, and compare the chamber statistics.
+All files served to the browser are located in `public/`. Configure your web server's document root to point to this directory:
 
-To run the model tests with Node.js 20 or later:
+- Entry point: `public/index.html`
+- Styles: `public/styles.css`
+- Browser modules: `public/src/`
+
+The site is static and requires no backend, build step, or external runtime dependencies. Serve it over HTTP(S) (rather than opening the HTML via `file://`) so browser JavaScript modules load reliably.
+
+For local development, run a static server with `public/` as its document root. To run the model tests with Node.js 20 or later from the repository root:
 
 ```sh
 npm test
