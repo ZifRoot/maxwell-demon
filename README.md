@@ -4,22 +4,22 @@ An interactive browser-based laboratory for exploring **Maxwell's demon**, gas d
 
 The project is intended to make a classic thought experiment tangible: simulate particles moving between two chambers, change the rule at the partition, and observe how the system's measurable properties evolve.
 
-> **Status:** Early-stage project. This repository currently documents the project and its intended direction; the simulation itself is not yet implemented.
+> **Status:** Initial working simulation. The model, interactive controls, live chamber statistics, and history charts are implemented. Particle–particle collisions and a physical energy/information budget for the demon are not implemented yet.
 
 ## The experiment
 
 A two-dimensional container is divided into left and right chambers by a partition. Particles move with individual velocities and interact with the walls and the passage between chambers.
 
-The user will be able to switch between several partition modes:
+The interface supports four partition modes:
 
 - **Closed partition** — no particles cross.
 - **Open passage** — particles may cross in either direction.
 - **One-way filter** — particles may cross only from left to right.
 - **Maxwell's demon** — passage depends on particle speed; for example, fast particles are favoured to the right and slow particles to the left.
 
-Adjustable parameters will make it possible to investigate how filtering rules affect particle counts, kinetic energy, temperature estimates, and pressure estimates.
+Adjustable particle count, velocity scale, speed distribution, and demon threshold make it possible to investigate how filtering rules affect particle counts, kinetic energy, temperature estimates, and pressure estimates.
 
-## Planned features
+## Implemented features
 
 - A real-time 2D Canvas view of both chambers and moving particles.
 - Adjustable particle count and speed scale.
@@ -34,7 +34,7 @@ Adjustable parameters will make it possible to investigate how filtering rules a
 - Pause, resume, reset, and velocity randomisation controls.
 - A self-contained page that can run locally in a modern browser without a server.
 
-These are planned capabilities, not claims about features already available.
+The simulation is deliberately dependency-free and runs entirely in the browser.
 
 ## Physical model and limitations
 
@@ -56,7 +56,7 @@ P^* \propto N T^*.
 
 These quantities are useful for comparing the two chambers, but they do not necessarily represent the full mechanical pressure in a strongly non-equilibrium state. Temperature is undefined for an empty chamber.
 
-The first version may omit particle–particle collisions. If so, this limitation must remain visible in the interface and documentation: without collisions, the model cannot fully reproduce thermalisation and equilibrium.
+Particle–particle collisions are currently omitted; without them, the model cannot fully reproduce thermalisation and equilibrium. The interface keeps this limitation visible.
 
 ## An important distinction
 
@@ -83,21 +83,23 @@ The goal is to keep the first version lightweight and easy to run locally, witho
 
 ## Getting started
 
-Once the simulation page is implemented:
-
 1. Clone or download this repository.
-2. Open the project's HTML entry point in a modern browser.
+2. Open `index.html` in a modern browser. No build step, server, or external dependency is required.
 3. Select a partition mode, adjust its parameters, and compare the chamber statistics.
 
-**There is no runnable simulation yet.** Setup instructions will be updated when the initial implementation is added.
+To run the model tests with Node.js 20 or later:
+
+```sh
+npm test
+```
 
 ## Roadmap
 
-- [ ] Implement the particle system and chamber geometry.
-- [ ] Add closed, open, one-way, and speed-selective partition modes.
-- [ ] Calculate and display chamber statistics.
-- [ ] Add time-series charts and experiment controls.
-- [ ] Validate the model with repeatable test scenarios.
+- [x] Implement the particle system and chamber geometry.
+- [x] Add closed, open, one-way, and speed-selective partition modes.
+- [x] Calculate and display chamber statistics.
+- [x] Add time-series charts and experiment controls.
+- [x] Add repeatable tests for partition rules, crossings, and statistics.
 - [ ] Add particle–particle collisions and study their effect on equilibration.
 - [ ] Explore accounting for the demon's measurement and information-processing costs.
 
